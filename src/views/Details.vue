@@ -18,7 +18,7 @@ const { title, genres, imdbId, overview, productionCountries } = toRefs(props)
 <template>
   <section class="movies">
     <div>
-      <a v-bind:href="imdbMovieUrl+imdbId">
+      <a v-bind:href="imdbMovieUrl+'/'+imdbId">
         <h3>{{title}}</h3>
         <img src="/imdb-logo.svg" alt="">
       </a>

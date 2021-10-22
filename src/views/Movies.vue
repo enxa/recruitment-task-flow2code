@@ -1,10 +1,14 @@
- <script setup>
+<script setup>
+import { ref } from 'vue' 
 import Movie from './Movie.vue'
+import Spinner from '../components/Spinner.vue'
 import useFetch from '../composables/useFetch.js'
+
+const tmdbMovieUrl = ref(process.env.VUE_APP_TMDB_MOVIE_URL)
 
 const { data: movies, error, loading, load } = useFetch()
 
-load('https://api.themoviedb.org/3/movie/popular', {
+load(`${tmdbMovieUrl.value}/popular`, {
   method: 'GET',
   headers: {
     'Authorization': `Bearer ${process.env.VUE_APP_TMDB_API_READ_ACCESS_TOKEN}`
@@ -21,6 +25,8 @@ load('https://api.themoviedb.org/3/movie/popular', {
       </div>
     </div>
     <div v-if="error">{{error}}</div>
-    <div v-if="loading">Loading...</div>
+    <div v-if="loading">
+      <Spinner />
+    </div>
   </section>
 </template>

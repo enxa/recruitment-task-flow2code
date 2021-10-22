@@ -19,7 +19,7 @@ const { id, poster, title, popularity, votes } = toRefs(props)
   <router-link v-bind:to="{ name: 'MovieDetails', params: { id: id } }">
     <section class="movies">
       <div>
-        <img v-bind:src="baseImgUrl+poster" v-bind:alt="title">  
+        <img v-bind:src="baseImgUrl+'/'+poster" v-bind:alt="title">  
       </div>
       <div>
         <h3>{{title}}</h3>
