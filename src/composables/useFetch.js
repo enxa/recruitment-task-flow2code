@@ -10,8 +10,7 @@ const useFetch = () => {
     try {
       const result = await fetch(url, config)
       let response = await result.json()
-      data.value = await response.results
-      console.log(data.value.results)
+      data.value = await response
     } catch (err) {
       error.value = err.message
     } finally {

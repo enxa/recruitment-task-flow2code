@@ -1,9 +1,8 @@
  <script setup>
-import { ref } from 'vue'
 import Movie from './Movie.vue'
 import useFetch from '../composables/useFetch.js'
 
-const { data, error, loading, load } = useFetch()
+const { data: movies, error, loading, load } = useFetch()
 
 load('https://api.themoviedb.org/3/movie/popular', {
   method: 'GET',
@@ -16,12 +15,9 @@ load('https://api.themoviedb.org/3/movie/popular', {
 
 <template>
   <section class="movies">
-    <div v-if="data">
-      <div v-for="movie in data">
-        <!-- <pre style="border: 1px solid">
-          {{movie}}
-        </pre> -->
-        <Movie v-bind:poster="movie.poster_path" v-bind:title="movie.title" v-bind:popularity="movie.popularity" v-bind:votes="movie.vote_count"/>
+    <div v-if="movies">
+      <div v-for="movie in movies.results" v-bind:key="movie.id">
+        <Movie v-bind:id="movie.id" v-bind:poster="movie.poster_path" v-bind:title="movie.title" v-bind:popularity="movie.popularity" v-bind:votes="movie.vote_count"/>
       </div>
     </div>
     <div v-if="error">{{error}}</div>
